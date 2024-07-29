@@ -1,25 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createContext, useRef, useState, lazy } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "@mui/material";
+
+import "./App.css";
+import { AppContextType } from "./interfaces";
+import MainLayout from "./components/MainLayout";
+
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Login = lazy(() => import("./pages/Login"));
+
+export const AppContext = createContext<AppContextType>({
+  mainContentHeight: "",
+  isLoggedIn: false,
+  darkMode: false,
+});
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+  const mainContentRef = useRef(null);
+  const appRef = useRef(null);
+  const [mainContentHeight, setMainContentHeight] = useState(null);
+  const token = localStorage.getItem("token");
+  const [isLoggedIn, setIsLoggedIn] = useState(token ? true : false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider
+      value={{
+        mainContentHeight,
+        setMainContentHeight,
+        mainContentRef,
+        isLoggedIn,
+        setIsLoggedIn,
+        appRef,
+        darkMode,
+        setDarkMode,
+      }}
+    >
+      <ThemeProvider theme={darkMode}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route
+              path="/dashboard"
+              element={
+                <MainLayout>
+                  <Dashboard />
+                </MainLayout>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </AppContext.Provider>
   );
 }
 
