@@ -1,6 +1,6 @@
 import { Box, Divider, Drawer, Paper } from "@mui/material";
 import { DonutSmallOutlined } from "@mui/icons-material";
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import DrawerList from "../DrawerList";
 import { AppContext } from "../../App";
 
@@ -8,7 +8,6 @@ const Sidebar = () => {
   const [open, setOpen] = useState(false);
   const context = useContext(AppContext);
   const { isLoggedIn, mainContentHeight } = context;
-  const headerRef = useRef<any>(null);
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
@@ -25,7 +24,7 @@ const Sidebar = () => {
         onMouseEnter={toggleDrawer(true)}
         elevation={1}
       >
-        <Box ref={headerRef}>
+        <Box>
           <img
             src="https://techsavvy.ai/assets/images/common/favicon/favicon.ico"
             alt="logo"
