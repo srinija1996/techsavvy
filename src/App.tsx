@@ -37,7 +37,7 @@ function App() {
       }}
     >
       <ThemeProvider theme={darkMode}>
-        <BrowserRouter basename="/techsavvy">
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route
