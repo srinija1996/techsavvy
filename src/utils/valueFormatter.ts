@@ -1,5 +1,5 @@
 export const valueFormatter = (name: string, v: number) => {
-  const numbersMetrics = ["Impressions", "Clicks", "Orders", "ROAS", "RPC"];
+  // const numbersMetrics = ["Impressions", "Clicks", "Orders", "ROAS", "RPC"];
   const currencyMetrics = [
     "Spend",
     "Revenue",
