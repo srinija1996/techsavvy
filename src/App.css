@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+}
+
+.MuiChartsAxis-line{
+  stroke: rgb(206, 204, 204) !important;
+}
+
+.MuiChartsAxis-tickLabel {
+  stroke:rgb(206, 204, 204) !important;
+  stroke-width: 0.5px !important;
+}
+
+.MuiOutlinedInput-notchedOutline{
+  border:none !important;
+}
