@@ -6,8 +6,9 @@ import {
   Checkbox,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { loginService } from "../../services";
 import { Navigate, useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
@@ -19,6 +20,8 @@ const Login = () => {
   const context = useContext(AppContext);
   const { isLoggedIn, setIsLoggedIn } = context;
   const navigate = useNavigate();
+  const smallDevice = useMediaQuery("(max-width:500px)");
+  const logoRef = useRef<any>(null);
 
   const onChangeCredentials = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials((prevState) => ({
@@ -70,6 +73,7 @@ const Login = () => {
           flexDirection: "column",
           alignItems: "center",
           pt: 8,
+          px: 1,
           width: "100%",
         }}
       >
@@ -78,11 +82,13 @@ const Login = () => {
           alt="logo"
           style={{ height: "100px", paddingBottom: "100px" }}
           loading="lazy"
+          ref={logoRef}
         />
         <Card
           sx={{
-            p: 10,
-            width: "25%",
+            p: smallDevice ? 1 : 10,
+            width: logoRef?.current?.scrollWidth,
+            maxWidth: "100vw",
             backgroundColor: "#fcfafd",
             border: "solid 5px white",
             borderRadius: "13px",
